@@ -54,6 +54,40 @@ const Flight = () => {
         }
     };
 
+    const handleDownloadJSON = () => {
+        const destLocation = JSON.parse(flight.DestLocation);
+        const originLocation = JSON.parse(flight.OriginLocation);
+
+        const flightData = {
+            ...flight,
+            DestLocation: destLocation,
+            OriginLocation: originLocation
+        };
+        const jsonFlightData = JSON.stringify(flightData, null, 2);
+        const blob = new Blob([jsonFlightData], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `flight_${id}.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    };
+
+    // const handleDownloadJSON = () => {
+    //     const jsonFlightData = JSON.stringify(flight, null, 2); // 2 - liczba spacji wcięcia
+    //     const blob = new Blob([jsonFlightData], { type: 'application/json' });
+    //     const url = URL.createObjectURL(blob);
+    //     const a = document.createElement('a');
+    //     a.href = url;
+    //     a.download = `flight_${id}.json`;
+    //     document.body.appendChild(a);
+    //     a.click();
+    //     document.body.removeChild(a);
+    //     URL.revokeObjectURL(url);
+    // };
+
     const handleLogout = () => {
         localStorage.removeItem("token");
         navigate("/login");
@@ -107,6 +141,7 @@ const Flight = () => {
                     <Link to="/" className={styles.flight_button}>Powrót</Link>
                     <Link to={`/flights/${flight._id}/edit`} className={styles.flight_button}>Edytuj</Link>
                     <button onClick={handleDelete} className={styles.flight_button}>Usuń</button>
+                    <button onClick={handleDownloadJSON} className={styles.flight_button}>Pobierz JSON</button>
                 </div>
             </div>
         </div>
