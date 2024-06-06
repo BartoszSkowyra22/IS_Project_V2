@@ -43,8 +43,8 @@ router.get("/filters", async (req, res) => {
 router.get("/:id", async (req, res) => {
     try {
         const flight = await Flight.findById(req.params.id);
+        console.log(flight)
         if (!flight) return res.status(404).send({ message: "Flight not found" });
-
         res.status(200).send({ data: flight });
     } catch (error) {
         res.status(500).send({ message: "Internal Server Error" });

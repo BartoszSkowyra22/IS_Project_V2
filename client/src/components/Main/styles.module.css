@@ -113,7 +113,7 @@ body {
 
 /*New styles*/
 
-.recipe_container {
+.flight_container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -123,14 +123,14 @@ body {
     box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
 }
 
-.recipe_header {
+.flight_header {
     text-align: center;
     color: #ff4500;
     font-family: 'Montserrat', sans-serif;
     margin-bottom: 20px;
 }
 
-.recipe_details {
+.flight_details {
     width: 100%;
     max-width: 800px;
     background: white;
@@ -140,24 +140,24 @@ body {
     margin-bottom: 20px;
 }
 
-.recipe_details p {
+.flight_details p {
     font-size: 16px;
     line-height: 1.5;
     margin: 10px 0;
     color: #333;
 }
 
-.recipe_details h3 {
+.flight_details h3 {
     color: #ff4500;
     margin-bottom: 10px;
 }
 
-.recipe_buttons {
+.flight_buttons {
     display: flex;
     gap: 10px;
 }
 
-.recipe_button {
+.flight_button {
     border: none;
     outline: none;
     padding: 12px 20px;
@@ -172,7 +172,7 @@ body {
     text-align: center;
 }
 
-.recipe_button:hover {
+.flight_button:hover {
     background-color: #e5533b;
     transform: scale(1.05);
 }

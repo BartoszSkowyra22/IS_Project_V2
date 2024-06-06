@@ -3,12 +3,10 @@
 // import {Link, useNavigate, useParams} from "react-router-dom"
 // import styles from "./styles.module.css"
 //
-// const categories = ['Śniadanie', 'Zupa', 'Obiad', 'Kolacja', 'Deser'];
 //
 // const AddRecipe = () => {
 //     const [data, setData] = useState({
 //         name: "",
-//         category: "",
 //         ingredients: "",
 //         instructions: "",
 //     })
@@ -28,7 +26,6 @@
 //                         const {data} = await axios.get(`http://localhost:8080/api/recipes/${id}`);
 //                         setData({
 //                             name: data.data.name,
-//                             category: data.data.category,
 //                             ingredients: data.data.ingredients,
 //                             instructions: data.data.instructions,
 //                         });
@@ -85,13 +82,6 @@
 //                             required
 //                             className={styles.input}
 //                         />
-//                         <select name="category" value={data.category} onChange={handleChange} required
-//                                 className={styles.input}>
-//                             <option value="">Wybierz kategorię</option>
-//                             {categories.map(category => (
-//                                 <option key={category} value={category}>{category}</option>
-//                             ))}
-//                         </select>
 //                         <input
 //                             type="text"
 //                             placeholder="Składniki"
