@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import styles from './styles.module.css';
 
-const FlightList = ({ selectedFilter }) => {
+const FlightList = ({ filters }) => {
     const [flights, setFlights] = useState([]);
 
     const handleGetFlights = async () => {
@@ -31,9 +31,11 @@ const FlightList = ({ selectedFilter }) => {
         handleGetFlights();
     }, []);
 
-    const filteredFlights = selectedFilter
-        ? flights.filter(flight => flight[selectedFilter])
-        : flights;
+    const filteredFlights = flights.filter(flight =>
+        (!filters.destCityName || flight.DestCityName === filters.destCityName) &&
+        (!filters.originCityName || flight.OriginCityName === filters.originCityName) &&
+        (!filters.flightDelayType || flight.FlightDelayType === filters.flightDelayType)
+    );
 
     return (
         <div className={styles.flight_list}>
@@ -41,7 +43,7 @@ const FlightList = ({ selectedFilter }) => {
             <ul>
                 {filteredFlights.map(flight => (
                     <li key={flight._id}>
-                        <Link to={`/flights/${flight._id}`}>{flight.FlightNum} - {flight.DestCityName} to {flight.OriginCityName} </Link>
+                        <Link to={`/flights/${flight._id}`}>{flight.FlightNum}</Link> - {flight.OriginCityName} to {flight.DestCityName}
                     </li>
                 ))}
             </ul>
@@ -50,59 +52,3 @@ const FlightList = ({ selectedFilter }) => {
 };
 
 export default FlightList;
-
-
-
-
-// import React, {useEffect, useState} from 'react';
-// import axios from 'axios';
-// import {Link} from 'react-router-dom';
-// import styles from './styles.module.css'
-//
-// const RecipeList = ({selectedCategory}) => {
-//     const [recipes, setRecipes] = useState([]);
-//
-//     const handleGetRecipes = async () => {
-//         const token = localStorage.getItem("token");
-//         if (token) {
-//             try {
-//                 const config = {
-//                     method: 'get',
-//                     url: 'http://localhost:8080/api/recipes',
-//                     headers: {'Content-Type': 'application/json', 'x-access-token': token}
-//                 }
-//                 const {data: res} = await axios(config);
-//                 setRecipes(res.data);
-//                 console.log(res.data)
-//             } catch (error) {
-//                 if (error.response && error.response.status >= 400 && error.response.status <= 500) {
-//                     localStorage.removeItem("token");
-//                     window.location.reload();
-//                 }
-//             }
-//         }
-//     };
-//
-//     useEffect(() => {
-//         handleGetRecipes();
-//     }, []);
-//
-//     const filteredRecipes = selectedCategory
-//         ? recipes.filter(recipe => recipe.category === selectedCategory)
-//         : recipes;
-//
-//     return (
-//         <div className={styles.recipe_list}>
-//             <h2>Lista przepisów</h2>
-//             <ul>
-//                 {filteredRecipes.map(recipe => (
-//                     <li key={recipe._id}>
-//                         <Link to={`/recipes/${recipe._id}`}>{recipe.name}</Link>
-//                     </li>
-//                 ))}
-//             </ul>
-//         </div>
-//     );
-// };
-//
-// export default RecipeList;

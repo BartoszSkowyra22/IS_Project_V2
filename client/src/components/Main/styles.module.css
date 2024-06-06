@@ -2,7 +2,7 @@ body {
     margin: 0;
     font-family: 'Arial', sans-serif;
     background: url("../../Assets/Images/airplane.jpg");
-    background-size: cover;
+    /*background-size: cover;*/
 }
 
 .main_container {
@@ -16,7 +16,7 @@ body {
 .navbar {
     width: 97%;
     height: 70px;
-    background-color: #ff4500;
+    background-color: #007bff;
     display: flex;
     align-items: center;
     justify-content: end;
@@ -50,13 +50,13 @@ body {
     font-size: 14px;
     cursor: pointer;
     text-align: center;
-    color: #ff4500;
+    color: #007bff;
     text-decoration: none;
     transition: background-color 0.3s, color 0.3s;
 }
 
 .white_btn:hover {
-    background-color: #ff8c42;
+    background-color: #80bfff;
     color: white;
 }
 
@@ -65,7 +65,7 @@ body {
     padding: 10px;
     font-size: 16px;
     border-radius: 5px;
-    border: 2px solid #ff4500;
+    border: 2px solid #007bff;
     width: 100%;
     box-sizing: border-box;
 }
@@ -76,7 +76,7 @@ body {
 }
 
 .flight_list h2 {
-    color: #ff4500;
+    color: #007bff;
     font-family: 'Montserrat', sans-serif;
 }
 
@@ -105,15 +105,15 @@ body {
 
 .flight_list a {
     text-decoration: none;
-    color: #ff4500;
+    color: #007bff;
     font-weight: bold;
     display: block;
 }
 
 
-/*New styles*/
+/* New styles */
 
-.recipe_container {
+.flight_container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -123,14 +123,14 @@ body {
     box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
 }
 
-.recipe_header {
+.flight_header {
     text-align: center;
-    color: #ff4500;
+    color: #007bff;
     font-family: 'Montserrat', sans-serif;
     margin-bottom: 20px;
 }
 
-.recipe_details {
+.flight_details {
     width: 100%;
     max-width: 800px;
     background: white;
@@ -140,24 +140,24 @@ body {
     margin-bottom: 20px;
 }
 
-.recipe_details p {
+.flight_details p {
     font-size: 16px;
     line-height: 1.5;
     margin: 10px 0;
     color: #333;
 }
 
-.recipe_details h3 {
-    color: #ff4500;
+.flight_details h3 {
+    color: #007bff;
     margin-bottom: 10px;
 }
 
-.recipe_buttons {
+.flight_buttons {
     display: flex;
     gap: 10px;
 }
 
-.recipe_button {
+.flight_button {
     border: none;
     outline: none;
     padding: 12px 20px;
@@ -166,13 +166,13 @@ body {
     font-size: 14px;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.2s;
-    background-color: #ff4500;
+    background-color: #007bff;
     color: white;
     text-decoration: none;
     text-align: center;
 }
 
-.recipe_button:hover {
-    background-color: #e5533b;
+.flight_button:hover {
+    background-color: #0056b3;
     transform: scale(1.05);
 }
