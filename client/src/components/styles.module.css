@@ -16,7 +16,7 @@ body {
 .navbar {
     width: 100%;
     height: 70px;
-    background-color: #ff8c42;
+    background-color: #007bff;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -42,13 +42,13 @@ body {
     cursor: pointer;
     margin-right: 20px;
     text-align: center;
-    color: #ff4500;
+    color: #007bff;
     text-decoration: none;
     transition: background-color 0.3s, color 0.3s;
 }
 
 .white_btn:hover {
-    background-color: #ff8c42;
+    background-color: #007bff;
     color: white;
 }
 
@@ -57,7 +57,7 @@ body {
     padding: 10px;
     font-size: 16px;
     border-radius: 5px;
-    border: 2px solid #ff4500;
+    border: 2px solid #007bff;
     width: 100%;
     box-sizing: border-box;
 }
@@ -67,7 +67,7 @@ body {
 }
 
 .flight_list h2 {
-    color: #ff4500;
+    color: #007bff;
     font-family: 'Montserrat', sans-serif;
     text-align: center;
 }
@@ -92,7 +92,7 @@ body {
 
 .flight_list a {
     text-decoration: none;
-    color: #ff4500;
+    color: #007bff;
     font-weight: bold;
     display: block;
 }
