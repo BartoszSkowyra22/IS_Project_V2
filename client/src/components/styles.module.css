@@ -1,7 +1,7 @@
 body {
     margin: 0;
     font-family: 'Arial', sans-serif;
-    background: url(../Assets/Images/ticket.jpg) no-repeat center center fixed;
+    background: url("../Assets/Images/airplane.jpg") no-repeat center center fixed;
     background-size: cover;
 }
 
@@ -62,22 +62,22 @@ body {
     box-sizing: border-box;
 }
 
-.recipe_list {
+.flight_list {
     margin-top: 20px;
 }
 
-.recipe_list h2 {
+.flight_list h2 {
     color: #ff4500;
     font-family: 'Montserrat', sans-serif;
     text-align: center;
 }
 
-.recipe_list ul {
+.flight_list ul {
     list-style: none;
     padding: 0;
 }
 
-.recipe_list li {
+.flight_list li {
     background-color: white;
     margin: 10px 0;
     padding: 10px;
@@ -86,11 +86,11 @@ body {
     transition: transform 0.3s;
 }
 
-.recipe_list li:hover {
+.flight_list li:hover {
     transform: translateY(-5px);
 }
 
-.recipe_list a {
+.flight_list a {
     text-decoration: none;
     color: #ff4500;
     font-weight: bold;
