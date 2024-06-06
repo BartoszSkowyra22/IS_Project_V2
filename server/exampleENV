@@ -1,0 +1,5 @@
+DB=<YOUR_MONGODB_LINK>
+JWTPRIVATEKEY=abcdefg
+SALT=10
+
+//Konieczna jest zmiana nazwy pliku

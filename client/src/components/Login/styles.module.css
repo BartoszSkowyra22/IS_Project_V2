@@ -1,0 +1,111 @@
+.login_container {
+    width: 100%;
+    min-height: 100vh;
+    background-image: url("../../Assets/Images/dinner01.jpg");
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.login_form_container {
+    width: 600px;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.9);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    backdrop-filter: blur(10px);
+    margin: 20px;
+}
+
+.login_form_container h1 {
+    font-size: 32px;
+    color: #ff4500;
+    margin-bottom: 20px;
+}
+
+.input {
+    outline: none;
+    border: 1px solid #ccc;
+    width: 100%;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: #fff5f0;
+    margin: 10px 0;
+    font-size: 16px;
+    box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.input:focus {
+    border-color: #ff4500;
+    background-color: #ffe5de;
+}
+
+.error_msg {
+    width: 100%;
+    padding: 15px;
+    margin: 10px 0;
+    font-size: 14px;
+    background-color: #f34646;
+    color: white;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.white_btn,
+.orange_btn {
+    border: none;
+    outline: none;
+    padding: 12px 20px;
+    border-radius: 30px;
+    width: 200px;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.white_btn {
+    background-color: #ff6347;
+    color: #fff;
+    margin: 10px 0;
+}
+
+.white_btn:hover {
+    background-color: #ff4500;
+    transform: scale(1.05);
+}
+
+.orange_btn {
+    background-color: #ff4500;
+    color: white;
+    margin: 20px 36%;
+    align-self: center;
+}
+
+.orange_btn:hover {
+    background-color: #e53e00;
+    transform: scale(1.05);
+}
+
+.login_prompt {
+    font-size: 16px;
+    color: #333;
+    margin-top: 20px;
+}
+
+.login_link {
+    color: #ff4500;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.login_link:hover {
+    text-decoration: underline;
+}
