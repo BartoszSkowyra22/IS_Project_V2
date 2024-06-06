@@ -55,38 +55,36 @@ const Flight = () => {
     };
 
     const handleDownloadJSON = () => {
-        const destLocation = JSON.parse(flight.DestLocation);
-        const originLocation = JSON.parse(flight.OriginLocation);
+        const jsonFlightData = JSON.stringify(flight, null, 2);
+        downloadFile(jsonFlightData, 'flight.json', 'application/json');
+    };
 
-        const flightData = {
-            ...flight,
-            DestLocation: destLocation,
-            OriginLocation: originLocation
-        };
-        const jsonFlightData = JSON.stringify(flightData, null, 2);
-        const blob = new Blob([jsonFlightData], { type: 'application/json' });
+    const handleDownloadXML = () => {
+        const xmlFlightData = generateXML(flight);
+        downloadFile(xmlFlightData, 'flight.xml', 'application/xml');
+    };
+
+    const downloadFile = (data, filename, type) => {
+        const blob = new Blob([data], { type: type });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = `flight_${id}.json`;
+        a.download = filename;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
     };
 
-    // const handleDownloadJSON = () => {
-    //     const jsonFlightData = JSON.stringify(flight, null, 2); // 2 - liczba spacji wcięcia
-    //     const blob = new Blob([jsonFlightData], { type: 'application/json' });
-    //     const url = URL.createObjectURL(blob);
-    //     const a = document.createElement('a');
-    //     a.href = url;
-    //     a.download = `flight_${id}.json`;
-    //     document.body.appendChild(a);
-    //     a.click();
-    //     document.body.removeChild(a);
-    //     URL.revokeObjectURL(url);
-    // };
+    const generateXML = (flightData) => {
+        let xmlString = `<?xml version="1.0" encoding="UTF-8" ?>\n<Flight>\n`;
+        for (const [key, value] of Object.entries(flightData)) {
+            xmlString += `  <${key}>${value}</${key}>\n`;
+        }
+        xmlString += `</Flight>`;
+        return xmlString;
+    };
+
 
     const handleLogout = () => {
         localStorage.removeItem("token");
@@ -142,6 +140,7 @@ const Flight = () => {
                     <Link to={`/flights/${flight._id}/edit`} className={styles.flight_button}>Edytuj</Link>
                     <button onClick={handleDelete} className={styles.flight_button}>Usuń</button>
                     <button onClick={handleDownloadJSON} className={styles.flight_button}>Pobierz JSON</button>
+                    <button onClick={handleDownloadXML} className={styles.flight_button}>Pobierz XML</button>
                 </div>
             </div>
         </div>
