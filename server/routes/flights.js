@@ -27,6 +27,18 @@ router.get("/", async (req, res) => {
     }
 });
 
+// Pobieranie unikalnych wartości dla pól filtrowania
+router.get("/filters", async (req, res) => {
+    try {
+        const destCityNames = await Flight.distinct("DestCityName");
+        const originCityNames = await Flight.distinct("OriginCityName");
+        const flightDelayTypes = await Flight.distinct("FlightDelayType");
+        res.status(200).send({ destCityNames, originCityNames, flightDelayTypes });
+    } catch (error) {
+        res.status(500).send({ message: "Internal Server Error" });
+    }
+});
+
 // Pobieranie jednego lotu według ID
 router.get("/:id", async (req, res) => {
     try {

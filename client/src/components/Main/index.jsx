@@ -1,22 +1,50 @@
 import styles from "./styles.module.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import FlightList from "../FlightList";
-
-const filters = ['DestCityName', 'OriginCityName', 'FlightNum', 'FlightDelayType'];
+import axios from "axios";
 
 const Main = () => {
     const navigate = useNavigate();
-    const [selectedFilter, setSelectedFilter] = useState("");
+    const [filters, setFilters] = useState({
+        destCityName: "",
+        originCityName: "",
+        flightDelayType: ""
+    });
+    const [filterOptions, setFilterOptions] = useState({
+        destCityNames: [],
+        originCityNames: [],
+        flightDelayTypes: []
+    });
 
     const handleChange = (e) => {
-        setSelectedFilter(e.target.value);
+        setFilters({
+            ...filters,
+            [e.target.name]: e.target.value
+        });
     };
 
     const handleLogout = () => {
         localStorage.removeItem("token");
         navigate("/login");
     };
+
+    const fetchFilterOptions = async () => {
+        try {
+            const { data } = await axios.get("http://localhost:8080/api/flights/filters");
+            setFilterOptions({
+                destCityNames: data.destCityNames,
+                originCityNames: data.originCityNames,
+                flightDelayTypes: data.flightDelayTypes
+            });
+        } catch (error) {
+            console.error("Error fetching filter options", error);
+        }
+    };
+
+    useEffect(() => {
+        fetchFilterOptions();
+    }, []);
 
     return (
         <div className={styles.main_container}>
@@ -27,19 +55,42 @@ const Main = () => {
                     Wyloguj
                 </button>
             </nav>
-            <select
-                name="filter"
-                value={selectedFilter}
-                onChange={handleChange}
-                required
-                className={styles.input}
-            >
-                <option value="">Wybierz filtr</option>
-                {filters.map(filter => (
-                    <option key={filter} value={filter}>{filter}</option>
-                ))}
-            </select>
-            {<FlightList selectedFilter={selectedFilter} />}
+            <div className={styles.filters}>
+                <select
+                    name="destCityName"
+                    value={filters.destCityName}
+                    onChange={handleChange}
+                    className={styles.input}
+                >
+                    <option value="">Wybierz miasto docelowe</option>
+                    {filterOptions.destCityNames.map(option => (
+                        <option key={option} value={option}>{option}</option>
+                    ))}
+                </select>
+                <select
+                    name="originCityName"
+                    value={filters.originCityName}
+                    onChange={handleChange}
+                    className={styles.input}
+                >
+                    <option value="">Wybierz miasto wylotu</option>
+                    {filterOptions.originCityNames.map(option => (
+                        <option key={option} value={option}>{option}</option>
+                    ))}
+                </select>
+                <select
+                    name="flightDelayType"
+                    value={filters.flightDelayType}
+                    onChange={handleChange}
+                    className={styles.input}
+                >
+                    <option value="">Wybierz typ opóźnienia</option>
+                    {filterOptions.flightDelayTypes.map(option => (
+                        <option key={option} value={option}>{option}</option>
+                    ))}
+                </select>
+            </div>
+            {<FlightList filters={filters} />}
         </div>
     );
 };
@@ -48,20 +99,19 @@ export default Main;
 
 
 
-
 // import styles from "./styles.module.css";
-// import {useState} from "react";
-// import {useNavigate, Link} from "react-router-dom";
-// import RecipeList from "../RecipeList";
+// import { useState } from "react";
+// import { useNavigate, Link } from "react-router-dom";
+// import FlightList from "../FlightList";
 //
-// const categories = ['Śniadanie', 'Zupa', 'Obiad', 'Kolacja', 'Deser'];
+// const filters = ['DestCityName', 'OriginCityName', 'FlightNum', 'FlightDelayType'];
 //
 // const Main = () => {
 //     const navigate = useNavigate();
-//     const [selectedCategory, setSelectedCategory] = useState("");
+//     const [selectedFilter, setSelectedFilter] = useState("");
 //
 //     const handleChange = (e) => {
-//         setSelectedCategory(e.target.value);
+//         setSelectedFilter(e.target.value);
 //     };
 //
 //     const handleLogout = () => {
@@ -72,25 +122,25 @@ export default Main;
 //     return (
 //         <div className={styles.main_container}>
 //             <nav className={styles.navbar}>
-//                 <h1>Moje przepisy</h1>
-//                 <Link to="/addrecipe" className={styles.white_btn}>Nowy przepis</Link>
+//                 <h1>Moje Loty</h1>
+//                 <Link to="/addflight" className={styles.white_btn}>Nowy lot</Link>
 //                 <button className={styles.white_btn} onClick={handleLogout}>
 //                     Wyloguj
 //                 </button>
 //             </nav>
 //             <select
-//                 name="category"
-//                 value={selectedCategory}
+//                 name="filter"
+//                 value={selectedFilter}
 //                 onChange={handleChange}
 //                 required
 //                 className={styles.input}
 //             >
-//                 <option value="">Wybierz kategorię</option>
-//                 {categories.map(category => (
-//                     <option key={category} value={category}>{category}</option>
+//                 <option value="">Wybierz filtr</option>
+//                 {filters.map(filter => (
+//                     <option key={filter} value={filter}>{filter}</option>
 //                 ))}
 //             </select>
-//             {/*<RecipeList selectedCategory={selectedCategory}/>*/}
+//             {<FlightList selectedFilter={selectedFilter} />}
 //         </div>
 //     );
 // };
