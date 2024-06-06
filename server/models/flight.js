@@ -5,10 +5,10 @@ const Joi = require("joi");
 const flightSchema = new mongoose.Schema({
     AvgTicketPrice: { type: String, required: true },
     Cancelled: { type: String, required: true },
-    Dest: { type: String, required: true },
-    DestAirportID: { type: String, required: true },
+    Dest: { type: String },
+    DestAirportID: { type: String},
     DestCityName: { type: String, required: true },
-    DestCountry: { type: String, required: true },
+    DestCountry: { type: String},
     DestLocation: {
         lat: { type: String },
         lon: { type: String }
@@ -25,7 +25,7 @@ const flightSchema = new mongoose.Schema({
     FlightTimeMin: { type: Number },
     Origin: { type: String },
     OriginAirportID: { type: String },
-    OriginCityName: { type: String },
+    OriginCityName: { type: String, required: true },
     OriginCountry: { type: String },
     OriginLocation: {
         lat: { type: String },
@@ -44,10 +44,10 @@ const validateFlight = (data) => {
     const schema = Joi.object({
         AvgTicketPrice: Joi.string().required().label("AvgTicketPrice"),
         Cancelled: Joi.string().required().label("Cancelled"),
-        Dest: Joi.string().required().label("Dest"),
-        DestAirportID: Joi.string().required().label("DestAirportID"),
+        Dest: Joi.string().label("Dest"),
+        DestAirportID: Joi.string().label("DestAirportID"),
         DestCityName: Joi.string().required().label("DestCityName"),
-        DestCountry: Joi.string().required().label("DestCountry"),
+        DestCountry: Joi.string().label("DestCountry"),
         DestLocation: Joi.object({
             lat: Joi.string().label("Latitude"),
             lon: Joi.string().label("Longitude")
@@ -64,7 +64,7 @@ const validateFlight = (data) => {
         FlightTimeMin: Joi.number().label("FlightTimeMin"),
         Origin: Joi.string().label("Origin"),
         OriginAirportID: Joi.string().label("OriginAirportID"),
-        OriginCityName: Joi.string().label("OriginCityName"),
+        OriginCityName: Joi.string().required().label("OriginCityName"),
         OriginCountry: Joi.string().label("OriginCountry"),
         OriginLocation: Joi.object({
             lat: Joi.string().label("Latitude"),
@@ -83,7 +83,7 @@ module.exports = { Flight, validateFlight };
 
 
 
-// // /models/AddRecipe.js
+// // /models/AddFlight.js
 // const mongoose = require("mongoose");
 // const Joi = require("joi");
 //
