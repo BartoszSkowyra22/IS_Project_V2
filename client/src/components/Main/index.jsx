@@ -39,7 +39,7 @@ const Main = () => {
                     <option key={category} value={category}>{category}</option>
                 ))}
             </select>
-            <RecipeList selectedCategory={selectedCategory}/>
+            {/*<RecipeList selectedCategory={selectedCategory}/>*/}
         </div>
     );
 };
