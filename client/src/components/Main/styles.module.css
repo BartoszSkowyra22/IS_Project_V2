@@ -1,7 +1,7 @@
 body {
     margin: 0;
     font-family: 'Arial', sans-serif;
-    background: url(../../Assets/Images/dinner01.jpg) no-repeat center center fixed;
+    background: url("../../Assets/Images/airplane.jpg");
     background-size: cover;
 }
 
@@ -70,17 +70,17 @@ body {
     box-sizing: border-box;
 }
 
-.recipe_list {
+.flight_list {
     margin-top: 20px;
     text-align: center;
 }
 
-.recipe_list h2 {
+.flight_list h2 {
     color: #ff4500;
     font-family: 'Montserrat', sans-serif;
 }
 
-.recipe_list ul {
+.flight_list ul {
     list-style: none;
     padding: 0;
     display: flex;
@@ -88,7 +88,7 @@ body {
     justify-content: center;
 }
 
-.recipe_list li {
+.flight_list li {
     background-color: white;
     margin: 10px;
     padding: 15px;
@@ -99,11 +99,11 @@ body {
     max-width: 300px;
 }
 
-.recipe_list li:hover {
+.flight_list li:hover {
     transform: translateY(-5px);
 }
 
-.recipe_list a {
+.flight_list a {
     text-decoration: none;
     color: #ff4500;
     font-weight: bold;
