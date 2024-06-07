@@ -50,11 +50,12 @@ const Main = () => {
         <div className={styles.main_container}>
             <nav className={styles.navbar}>
                 <h1>Moje Loty</h1>
-                <Link to="/addflight" className={styles.white_btn}>Nowy lot</Link>
-                <button className={styles.white_btn} onClick={handleLogout}>
-                    Wyloguj
-                </button>
+                <div className={styles.nav_links}>
+                    <Link to="/addflight" className={styles.white_btn}>Nowy lot</Link>
+                    <button className={styles.white_btn} onClick={handleLogout}>Wyloguj</button>
+                </div>
             </nav>
+
             <div className={styles.filters}>
                 <select
                     name="destCityName"
@@ -90,7 +91,7 @@ const Main = () => {
                     ))}
                 </select>
             </div>
-            {<FlightList filters={filters} />}
+            {<FlightList filters={filters}/>}
         </div>
     );
 };
