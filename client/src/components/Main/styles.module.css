@@ -19,7 +19,7 @@ body {
     background-color: #007bff;
     display: flex;
     align-items: center;
-    justify-content: end;
+    justify-content: space-between;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 0 20px;
@@ -29,8 +29,6 @@ body {
     color: white;
     font-size: 25px;
     font-family: 'Montserrat', sans-serif;
-    position: fixed;
-    left: 10%;
 }
 
 .nav_links {
@@ -175,4 +173,25 @@ body {
 .flight_button:hover {
     background-color: #0056b3;
     transform: scale(1.05);
+}
+
+h2 {
+    color: #007bff;
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+}
+
+.chart_container {
+    margin: 20px 0;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.pie_chart_container{
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    width: 50%;
+    margin: auto;
 }

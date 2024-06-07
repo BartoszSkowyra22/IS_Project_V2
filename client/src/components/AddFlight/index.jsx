@@ -39,6 +39,7 @@ const AddFlight = () => {
         hour_of_day: "",
     });
     const [error, setError] = useState("");
+    const [weatherOptions, setWeatherOptions] = useState([]);
     const navigate = useNavigate();
     const { id } = useParams();
 
@@ -55,6 +56,18 @@ const AddFlight = () => {
             fetchFlight();
         }
     }, [id]);
+
+    useEffect(() => {
+        const fetchWeatherOptions = async () => {
+            try {
+                const { data } = await axios.get(`http://localhost:8080/api/flights/chart-data-by-weather`);
+                setWeatherOptions(Object.keys(data));
+            } catch (error) {
+                console.error('Error fetching weather options:', error.response || error.message);
+            }
+        };
+        fetchWeatherOptions();
+    }, []);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -89,26 +102,41 @@ const AddFlight = () => {
                         <h1>{id ? "Edytuj lot" : "Dodaj nowy lot"}</h1>
                         <input
                             type="text"
-                            placeholder="Średnia cena biletu"
+                            placeholder="*Średnia cena biletu"
                             name="AvgTicketPrice"
                             value={flightData.AvgTicketPrice}
                             onChange={handleChange}
+                            required
                             className={styles.input}
                         />
 
-                        <input
-                            type="text"
-                            placeholder="Anulowany lot"
+                        <label htmlFor="cancelled">Anulowany lot</label>
+                        <select
+                            id="cancelled"
                             name="Cancelled"
                             value={flightData.Cancelled}
                             onChange={handleChange}
                             className={styles.input}
-                        />
+                        >
+                            <option value={false}>False</option>
+                            <option value={true}>True</option>
+                        </select>
+
+
+                        {/*<input*/}
+                        {/*    type="text"*/}
+                        {/*    placeholder="Anulowany lot"*/}
+                        {/*    name="Cancelled"*/}
+                        {/*    value={flightData.Cancelled}*/}
+                        {/*    onChange={handleChange}*/}
+                        {/*    className={styles.input}*/}
+                        {/*/>*/}
 
                         <input
                             type="text"
-                            placeholder="Miasto docelowe"
+                            placeholder="*Lotnisko docelowe"
                             name="Dest"
+                            required
                             value={flightData.Dest}
                             onChange={handleChange}
                             className={styles.input}
@@ -168,14 +196,20 @@ const AddFlight = () => {
                             className={styles.input}
                         />
 
-                        <input
-                            type="text"
-                            placeholder="Pogoda w miejscu docelowym"
+                        <label htmlFor="destWeather">Pogoda w miejscu docelowym</label>
+                        <select
+                            id="destWeather"
                             name="DestWeather"
                             value={flightData.DestWeather}
                             onChange={handleChange}
                             className={styles.input}
-                        />
+                        >
+                            {weatherOptions.map((option) => (
+                                <option key={option} value={option}>
+                                    {option}
+                                </option>
+                            ))}
+                        </select>
 
                         <input
                             type="text"
@@ -232,7 +266,7 @@ const AddFlight = () => {
                         />
 
                         <input
-                            type="text"
+                            type="number"
                             placeholder="Godzina lotu (godziny)"
                             name="FlightTimeHour"
                             value={flightData.FlightTimeHour}
@@ -241,7 +275,7 @@ const AddFlight = () => {
                         />
 
                         <input
-                            type="text"
+                            type="number"
                             placeholder="Godzina lotu (minuty)"
                             name="FlightTimeMin"
                             value={flightData.FlightTimeMin}
@@ -251,7 +285,7 @@ const AddFlight = () => {
 
                         <input
                             type="text"
-                            placeholder="Miasto wylotu"
+                            placeholder="Lotnisko wylotu"
                             name="Origin"
                             value={flightData.Origin}
                             onChange={handleChange}
@@ -305,21 +339,27 @@ const AddFlight = () => {
 
                         <input
                             type="text"
-                            placeholder="Region wylotowy"
+                            placeholder="Region wylotu"
                             name="OriginRegion"
                             value={flightData.OriginRegion}
                             onChange={handleChange}
                             className={styles.input}
                         />
 
-                        <input
-                            type="text"
-                            placeholder="Pogoda w miejscu wylotowym"
+                        <label htmlFor="originWeather">Pogoda w miejscu wylotu</label>
+                        <select
+                            id="originWeather"
                             name="OriginWeather"
                             value={flightData.OriginWeather}
                             onChange={handleChange}
                             className={styles.input}
-                        />
+                        >
+                            {weatherOptions.map((option) => (
+                                <option key={option} value={option}>
+                                    {option}
+                                </option>
+                            ))}
+                        </select>
 
                         <input
                             type="number"
@@ -328,6 +368,8 @@ const AddFlight = () => {
                             value={flightData.dayOfWeek}
                             onChange={handleChange}
                             className={styles.input}
+                            min="1"
+                            max="7"
                         />
 
                         <input
@@ -337,6 +379,8 @@ const AddFlight = () => {
                             value={flightData.hour_of_day}
                             onChange={handleChange}
                             className={styles.input}
+                            min="0"
+                            max="23"
                         />
 
                         {error && <div className={styles.error_msg}>{error}</div>}
