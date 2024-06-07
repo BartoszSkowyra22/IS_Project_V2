@@ -38,6 +38,59 @@ router.get("/filters", async (req, res) => {
     }
 });
 
+// Endpoint do zwrócenia danych do wykresu
+router.get("/chart-data", async (req, res) => {
+    try {
+        const flights = await Flight.find();
+
+        const priceRanges = {
+            "300-500": 0,
+            "500-700": 0,
+            "700-900": 0,
+            "900+": 0,
+        };
+
+        flights.forEach(flight => {
+            const price = parseFloat(flight.AvgTicketPrice.replace(/[^0-9.-]+/g, ""));
+            if (price >= 300 && price < 500) {
+                priceRanges["300-500"]++;
+            } else if (price >= 500 && price < 700) {
+                priceRanges["500-700"]++;
+            } else if (price >= 700 && price < 900) {
+                priceRanges["700-900"]++;
+            } else if (price >= 900) {
+                priceRanges["900+"]++;
+            }
+        });
+
+        res.status(200).send(priceRanges);
+    } catch (error) {
+        res.status(500).send({ message: "Internal Server Error" });
+    }
+});
+
+// Endpoint do zwrócenia danych do wykresu liniowego
+router.get("/chart-data-by-hour", async (req, res) => {
+    try {
+        const flights = await Flight.find();
+
+        const hours = Array(24).fill(0);
+
+        flights.forEach(flight => {
+            const hour = flight.hour_of_day;
+            if (hour !== undefined && hour >= 0 && hour < 24) {
+                hours[hour]++;
+            }
+        });
+
+        res.status(200).send(hours);
+    } catch (error) {
+        res.status(500).send({ message: "Internal Server Error" });
+    }
+});
+
+
+
 // Pobieranie jednego lotu według ID
 router.get("/:id", async (req, res) => {
     try {
