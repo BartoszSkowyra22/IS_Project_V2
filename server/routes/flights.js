@@ -90,6 +90,37 @@ router.get("/chart-data-by-hour", async (req, res) => {
 });
 
 
+// Endpoint do zwrócenia danych do wykresu kołowego
+router.get("/chart-data-by-weather", async (req, res) => {
+    try {
+        const flights = await Flight.find();
+
+        const weatherCounts = {};
+
+        flights.forEach(flight => {
+            const weather = flight.DestWeather;
+            if (weather) {
+                if (!weatherCounts[weather]) {
+                    weatherCounts[weather] = 0;
+                }
+                weatherCounts[weather]++;
+            }
+        });
+
+        const totalFlights = flights.length;
+        const weatherPercentages = {};
+
+        for (const [weather, count] of Object.entries(weatherCounts)) {
+            weatherPercentages[weather] = ((count / totalFlights) * 100).toFixed(2);
+        }
+
+        res.status(200).send(weatherPercentages);
+    } catch (error) {
+        res.status(500).send({ message: "Internal Server Error" });
+    }
+});
+
+
 
 // Pobieranie jednego lotu według ID
 router.get("/:id", async (req, res) => {
