@@ -77,6 +77,8 @@ const AddFlight = () => {
         });
     };
 
+
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -121,16 +123,6 @@ const AddFlight = () => {
                             <option value={false}>False</option>
                             <option value={true}>True</option>
                         </select>
-
-
-                        {/*<input*/}
-                        {/*    type="text"*/}
-                        {/*    placeholder="Anulowany lot"*/}
-                        {/*    name="Cancelled"*/}
-                        {/*    value={flightData.Cancelled}*/}
-                        {/*    onChange={handleChange}*/}
-                        {/*    className={styles.input}*/}
-                        {/*/>*/}
 
                         <input
                             type="text"
